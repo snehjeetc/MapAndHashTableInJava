@@ -116,6 +116,7 @@ public class HashMap<K, V> implements CustomMap<K, V>{
             while(head != null){
                 if(head.getValue().getKey().equals(key)){
                     buckets[atIndex].remove(index);
+                    this.size--;
                     return;
                 }
                 index++;
