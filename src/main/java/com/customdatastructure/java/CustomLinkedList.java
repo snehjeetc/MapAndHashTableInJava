@@ -41,7 +41,6 @@ public class CustomLinkedList<T> {
         if(this.head == null) {
             this.head = newNode;
             this.tail = newNode;
-            return;
         }
         else {
             this.tail.setNext(newNode);

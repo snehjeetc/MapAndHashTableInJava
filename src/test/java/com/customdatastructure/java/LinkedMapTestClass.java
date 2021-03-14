@@ -16,6 +16,11 @@ public class LinkedMapTestClass {
             value = (value == null) ? 1 : value+1;
             myMap.put(word, value);
         }
+        EntrySet<String, Integer> entryset = myMap.entrySet();
+        while(entryset.hasNext()){
+            System.out.println("Key: " + entryset.getKey() + " Value: " + entryset.getValue());
+            entryset = entryset.next();
+        }
         int frequency = myMap.get("to");
         System.out.println(myMap);
         Assert.assertEquals(2, frequency);

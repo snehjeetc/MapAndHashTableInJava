@@ -5,5 +5,4 @@ public interface EntrySet<K, V> {
     EntrySet next();
     K getKey();
     V getValue();
-    void setValue(V value);
 }

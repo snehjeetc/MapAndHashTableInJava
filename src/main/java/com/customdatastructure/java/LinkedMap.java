@@ -9,15 +9,15 @@ public class LinkedMap<K, V> implements CustomMap<K, V> {
 
     @Override
     public void put(K key, V value){
-        if(containsKey(key)){
-            EntrySet entryPoint = entrySet();
-            while(entryPoint.hasNext()){
-                if(entryPoint.getKey().equals(key)) {
-                    entryPoint.setValue(value);
+        if(containsKey(key)) {
+            Node<Pair<K, V>> head = list.getHead();
+            while (head != null) {
+                if (head.getValue().getKey().equals(key)) {
+                    head.getValue().setValue(value);
+                    return;
                 }
-                entryPoint = entryPoint.next();
+                head = head.getNext();
             }
-            return;
         }
         list.add(new Pair(key, value));
     }
@@ -80,11 +80,6 @@ public class LinkedMap<K, V> implements CustomMap<K, V> {
         @Override
         public V getValue(){
             return next.getValue().getValue();
-        }
-
-        @Override
-        public void setValue(V value) {
-            this.next.getValue().setValue(value);
         }
     }
 
