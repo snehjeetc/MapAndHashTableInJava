@@ -3,8 +3,6 @@ package com.customdatastructure.java;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Locale;
-
 public class HashTableTestClass {
     @Test
     public void givenParagraph_UseHashTable_ReturnTheHeighestFrequency(){
@@ -47,5 +45,4 @@ public class HashTableTestClass {
 
         Assert.assertEquals(null, frequency);
     }
-
 }
