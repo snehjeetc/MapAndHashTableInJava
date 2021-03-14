@@ -32,6 +32,7 @@ public class HashMap<K, V> implements CustomMap<K, V>{
         CustomLinkedList<Pair<K, V>>[] oldBuckets = buckets;
         int oldBucketsCount = numBuckets;
         numBuckets *= 2;
+        this.size = 0;
         buckets = new CustomLinkedList[numBuckets];
 
         for(int i=0; i<oldBucketsCount; i++){
@@ -106,6 +107,23 @@ public class HashMap<K, V> implements CustomMap<K, V>{
         return null;
     }
 
+    @Override
+    public void remove(K key){
+        int atIndex = getBucketIndex(key);
+        if(buckets[atIndex] != null){
+            Node<Pair<K, V>> head = buckets[atIndex].getHead();
+            int index = 0;
+            while(head != null){
+                if(head.getValue().getKey().equals(key)){
+                    buckets[atIndex].remove(index);
+                    return;
+                }
+                index++;
+                head = head.getNext();
+            }
+        }
+    }
+
     private class HashMapEntry implements EntrySet<K, V>{
         int atIndex;
         Node<Pair<K, V>> next;
@@ -176,5 +194,20 @@ public class HashMap<K, V> implements CustomMap<K, V>{
     @Override
     public EntrySet entrySet() {
         return new HashMapEntry();
+    }
+
+    @Override
+    public int size(){
+        int counts = 0;
+        for(int i=0; i<numBuckets; i++){
+            if(buckets[i] != null)
+                counts += buckets[i].size();
+        }
+        return counts;
+    }
+
+    @Override
+    public boolean isEmpty(){
+        return size() == 0;
     }
 }

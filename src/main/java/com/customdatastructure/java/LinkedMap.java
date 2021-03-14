@@ -57,6 +57,20 @@ public class LinkedMap<K, V> implements CustomMap<K, V> {
         return null;
     }
 
+    @Override
+    public void remove(K key){
+        Node<Pair<K, V>> head = list.getHead();
+        int index = 0;
+        while(head != null){
+            if(head.getValue().getKey().equals(key)){
+                list.remove(index);
+                return;
+            }
+            index++;
+            head = head.getNext();
+        }
+    }
+
     private class LinkedMapEntry implements EntrySet<K,V>{
         Node<Pair<K, V>> next;
         public LinkedMapEntry(Node<Pair<K, V>> next){
@@ -90,5 +104,15 @@ public class LinkedMap<K, V> implements CustomMap<K, V> {
     @Override
     public String toString(){
         return "{" + list.toString() + "}";
+    }
+
+    @Override
+    public int size(){
+        return list.size();
+    }
+
+    @Override
+    public boolean isEmpty(){
+        return size() == 0;
     }
 }
